@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <title>Musical Wayfinder</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" href="static/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="static/css/jquery-ui.structure.min.css">
+    <link rel="stylesheet" href="static/css/jquery-ui.theme.min.css">
+    <!-- jQRangeSlider CSS -->
+    <link rel="stylesheet" href="static/css/iThing.css" type="text/css" />
+    <!-- D3 Tooltip CSS -->
+    <link rel="stylesheet" href="static/css/d3-tip.css">
+    <!-- Custom styling -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"><!-- Montserrat -->
+    <link rel="stylesheet" type="text/css" href="static/css/fonts/fonts.min.css" /><!-- minified Proxima Nova -->
+</head>
+
+<body>
+    <div id="status">
+        Loading...
+    </div>
+    <div id="viz" style="display: none;">
+        <div>
+            <button id="home-button">Home</button>
+            <button id="login-button">Log In</button>
+        </div>
+        <!-- Bootstrap grid setup -->
+        <div class="container-fluid">
+            <div class="row">
+                <br>
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-7 text-left">
+                    <div class="row">
+                        <p style="font-size:32px;font-weight:300"><span id="user-id"></span>'s Liked Songs</p>
+                    </div>
+                    <div class="row">
+                        <strong><span id="time"></span></strong>
+                    </div>
+                    
+                    <!-- <label style="font-size:30px; justify-content: left;">
+                        USERNAME<span id="username"></span>'s Library:
+                        <label style="font-size:30px;"></label> 
+                    </label>
+                    <br> -->
+                </div>
+                <div class="col-md-3 text-right">
+                    <div class="row">
+                        <br>
+                    </div>
+                    <div class="row">
+                        <strong><span id="songs"></span></strong> Songs
+                    </div>
+                    <div class="row">
+                        <strong><span id="genres"></span></strong> Genres
+                    </div>
+
+                </div>
+                <div class="col-md-1">
+                </div>    
+            </div>      
+
+            <div class="row row-no-gutters">
+                <div id="line-plot-area"></div>
+
+                <!-- <div class="col" style="width:100%; float:center">
+                </div> -->
+            </div>
+
+            <div class="row">
+                <!-- Song Plot -->
+                <div class="col-lg-5">
+                    <div id="song-plot-area">
+                    </div>
+                </div>
+
+                <!-- Control Panel -->
+                <div class="col-lg-2" style="margin-top: 50px; margin-bottom: 50px;">
+                    <!-- Legend for plots -->
+                    <div class="row">
+                        <div id="legend">
+                        </div>
+                    </div>
+
+                    <!-- X Axis dropdown box -->
+                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label  for="x-attribute-select"> X-Axis: </label>
+                                <select id="x-attribute-select" class="form-control">
+                                    <option selected value="energy">Energy</option>
+                                    <!-- <option value="liveness">Liveness</option> -->
+                                    <option value="speechiness">Speechiness</option>
+                                    <option value="acousticness">Acousticness</option>
+                                    <option value="instrumentalness">Instrumentalness</option>
+                                    <option value="danceability">Danceability</option>
+                                    <option value="loudness">Loudness</option>
+                                    <option value="valence">Valence</option>
+                                    <option value="popularity">Popularity</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Y Axis dropdown box -->
+                    <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="y-attribute-select"> Y-Axis: </label>
+                                <select id="y-attribute-select" class="form-control">
+                                    <option value="energy">Energy</option>
+                                    <!-- <option value="liveness">Liveness</option> -->
+                                    <option value="speechiness">Speechiness</option>
+                                    <option selected value="acousticness">Acousticness</option>
+                                    <option value="instrumentalness">Instrumentalness</option>
+                                    <option value="danceability">Danceability</option>
+                                    <option value="loudness">Loudness</option>
+                                    <option value="valence">Valence</option>
+                                    <option value="popularity">Popularity</option>
+                                </select>
+                            </div>
+                        </form>
+                        <br>
+                    </div>
+
+                    <!-- Button Controls -->
+                    <div class="row", style="margin-top: 20px; margin-bottom: 20px; justify-content: center;">
+                        
+                        <div class="btn-group">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons" style="position:relative; margin: 0 auto; left:10%">
+                                <label class="btn btn-default active" id="toggle-genres-library">
+                                        <input type="radio" name="toggle-genres-radio" autocomplete="off"> My Genres
+                                </label>
+                                <label class="btn btn-default" id="toggle-genres-all">
+                                    <input type="radio" name="toggle-genres-radio"  autocomplete="off" checked> All Genres
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br>
+                        </div>
+                        <div class="row">
+                        </div>
+                        <div class="btn-group">
+                            <div id="reset-button" class="btn btn-primary" style="position:relative; margin: 0 auto; left:25%">Reset Scatterplots
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genre Plot -->
+                <div class="col-lg-5">
+                    <div id="genre-plot-area">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4" style="width:100%; margin-left:100px;">
+                    <div class="row" id="stats-area"style="width:90%;">
+
+                        <div class="col-md-4" style="width:33%; float:left">
+                            <p style="font-size:25px; text-decoration:underline; text-align: center"> <strong>Most Played Artists</strong> </p>
+                            <ul class="list-group" id="top-artists" style="max-height: 500px; overflow: scroll; font-size:18px">
+                            </ul>     
+                        </div>
+    <!-- 
+                        <svg width="300" height="180">
+                                <rect x="50" y="20" rx="20" ry="20" width="700" height="700"
+                                style="fill:red;stroke:black;stroke-width:5;opacity:0.5" />
+                        </svg> -->
+
+                        <div class="col-lg-4" id="spotify-preview" style="float:center; width:33%;">
+                            
+                        </div>
+                        
+                        <div class="col-lg-4" style="width:33%; float:right; text-align: center">
+                            <p style="font-size:25px; text-decoration:underline"> <strong>Most Played Tracks</strong> </p>
+                            <ul class="list-group" id="top-tracks" style="max-height: 500px; overflow: scroll; font-size:18px">
+                            </ul>             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- External JS libraries -->
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script type="text/javascript" src="static/js/jquery-ui.min.js"></script>
+<!-- <script src="js/jquery-3.4.1.min.js"></script>-->
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/d3.min.js"></script>
+<script src="static/js/d3-tip.js"></script>
+
+<!-- JQRange Slider libraries -->
+<!-- <script src="js/jquery.js"></script>
+<script src="js/jquery-ui-1.8.16.custom.min.js"></script>
+<script src="js/jQDateRangeSlider-min.js"></script> -->
+
+<!-- dragslider libraries -->
+<script type="text/javascript" src="static/js/dragslider.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+
+<!-- Custom JS -->
+    <script src="bundle.js"></script>
+</body>
+</html>

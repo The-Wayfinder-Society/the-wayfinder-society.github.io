@@ -1,0 +1,25 @@
+/* body {
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+}*/
+
+
+body {
+    font-family: 'Montserrat';
+    font-size: 22px;
+}
+
+label {
+    font-weight:300;
+    font-size:18px
+}
+
+#status {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}

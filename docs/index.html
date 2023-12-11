@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xml:lang="en" lang="en">
+<head>
+  <title>Musical Wayfinder</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style media="all">
+* { padding: 0; margin: 0; }
+ body {
+  margin: 0 auto 0 auto;
+  padding: 0;
+  max-width: 1200px;
+  font-family: "Avenir", "Avenir Next", Helvetica Neue, Arial;
+  font-size: 0.95em;
+}
+ a, a:visited { text-decoration: none; color: #7533f4; }
+a:hover { text-decoration: underline; color: #f4b014; }
+ h1, h2, h3, h4, h5 {
+  color: #492a7c;
+  background-color: inherit;
+  font-weight: normal;
+  padding: 0 0 5px 0;
+  margin: 15px 0 0 0;
+  border: none;
+  clear: right;
+}
+h1 { font-size: 24pt; margin:  5px 0 10px 0; line-height: 28px; }
+h2 { font-size: 14pt; margin: 30px 0 15px 0; letter-spacing: 0.01em; border-bottom: 1px solid #ccc;  line-height: 20px;}
+h3 { font-size: 13pt; }
+h4 { font-size: 12pt; }
+h5 { font-size: 11pt; }
+p { margin: 0 0 10px 0; }
+ .content {
+  margin: 0;
+  padding: 15px 20px;
+  background-color: #ffffff;
+}
+ .title, .title h1, .title a {
+  color: #492a7c;
+  font-size: 24pt;
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+ .footer {
+  border-top: 1px solid #ccc;
+  margin-top: 30px;
+  padding-top: 4px;
+  text-align: right;
+  font-size: 12px;
+}
+.footer a {
+  color: #21346B;
+}
+.footer a:hover {
+  color: #ce3333;
+}
+  </style>
+</head>
+<body>
+<div class="content">
+   <section class="title">
+    <a href="/">Musical Wayfinder: A look into your Spotify library</a>
+    <div style="float:right;">
+        <!-- <a class="btn btn-primary" href="/viz" role="button">Try it!</a> -->
+        <a href="/viz" class="btn btn-success btn-xs" role="button" style="color: white; border-radius:50px;font-size:15pt; font-weight:bold; width:78pt;">Try it!</a>
+        <!-- <button type="button" class="btn btn-success btn-link">Success</button> -->
+    </div>
+  </section>
+
+  <section>
+    <h2>What is this?</h2>
+    <p>
+      The Musical Wayfinder is an interactive visualization intended to bridge that gap between us and our music. This tool allows you to track your musical tastes through time, investigate the musical attributes of > 3,000 genres catalogued by Spotify, and discover where your personal library falls within that vast musical landscape. <br>
+    </p>
+    <p>
+        You can find more information about the Wayfinder by reading this <a href="/static/PDF/paper.pdf">paper</a> and <a href="/static/PDF//poster.pdf">poster</a>, produced as deliverables for the CSE 512 Data Visualization course at the University of Washington.
+    </p>
+
+  </section>
+
+   <section>
+    <h2>How do I use it?</h2>
+    <div style="text-align: center">
+      <img src="/static/images/wayfinder.png" style="width: 80%;">
+    </div>
+    <p>
+    This is the Musical Wayfinder dashboard. The two scatter plots show your library songs (a) and the genres that your library is composed of (b). Dropdown menus (c) allow you to select the axes of the scatter plots, which represent <a href="https://developer.spotify.com/documentation/web-api/reference/object-model/#audio-features-object">Spotify audio features</a>. A timeline (d) shows when you added songs to your library. A legend (e) shows the colors corresponding to the umbrella genres that each song and genre are classified into. Bars show the relative abundances of those umbrella genres in the your library. A brush filter can be used to select a time range in the timeline. This interaction updates the songs and genres shown in the scatter plots as well as the size of the bars in the legend to reflect your library composition over the selected time range.
+    </p>
+    
+  </section>
+
+
+
+  <section>
+      <h2>Interactions</h2>
+      <h3> Scatter Plots </h3>
+      <p>
+        <strong>Hover</strong> over a point on either scatter plot to see information about an individual song or genre.
+      </p>
+      <p>
+        <strong>Select</strong> which axes to plot by clicking on the "X-Axis" and "Y-Axis" dropdown menus and selecting an option.
+      </p>
+      <p>
+        <strong>Click</strong> on a point to embed a Spotify player with a preview of a song or genre.
+      </p>
+      <p>
+        <strong>Control+Click</strong> / <strong>Command+Click</strong> on a point to select/deselect it. 
+        Performing this action on a song will show you when you added it to your library in the timeline and all of the genres it belongs to in the genre plot.
+        Performing this action on a genre will show you when you added songs from that genre in the timeline and all of the songs that belong to it.
+      </p>
+      <h3> Timeline </h3>
+      <p>
+        <strong>Click and drag</strong> over a region in the timeline to have the visualization reflect your library in a certain time range.
+      </p>
+      <p>
+        <strong>Click and drag</strong> on the ends of a time selection to resize your selection.
+      </p>
+      <h3> Legend </h3>
+      <p>
+        <strong>Hover</strong> over an umbrella genre to highlight it in the timeline.
+      </p>
+      <p>
+        <strong>Click</strong> on an umbrella genre to remove / add it back into the data under consideration.
+      </p>
+      <h3>My Genres / All Genres</h3>
+      <p>
+        <strong>Click</strong> on either the "My Genres" or the "All Genres" button to toggle displaying either just
+        the genres in your library / your current selection, or displaying all of the genres that Spotify catalogues.
+      </p>
+      <h3>Top Tracks / Artists</h3>
+      <p>
+        <strong>Click</strong> on a track or artist in the lists to select/deselect to make a selection on them. <strong>If a track or artist does not appear</strong>, it may not be in your saved tracks
+        on Spotify.
+      </p>
+      <h3>Lost?</h3>
+      <p>
+        <strong>Click</strong> on the reset button to reset all plots to their default view.
+      </p>
+  </section>
+
+  <section>
+    <h2>Example interaction</h2>
+
+    By brushing on the timeline, you can gain insight into how your library has evolved over time. 
+    In the example below, selecting a region early in time reveals the genres that the user was initially exposed to (left). 
+    Selecting a more recent region at the end of the timeline reveals that the genres the user is adding to their library have become more varied (middle). 
+    You can discover what new genres you have added by hovering over them 
+    (a). A tooltip shows the name of the genre, its average song attribute values, and the number of songs of that genre in the current time selection. 
+    Clicking on the genre (b) produces a playlist created by Spotify that represents that genre (right).
+
+    <div style="text-align: center">
+        <img src="/static/images/insight_1.png" style="width: 80%;">
+    </div>
+  </section>
+
+
+  <div class="footer">
+    A visualization by <a href="https://hvbish.github.io">Hannah Bish</a> and <a href="https://www.stevenstetzler.com">Steven Stetzler</a>
+  </div>
+ </div>
+</body>
+</html> 
